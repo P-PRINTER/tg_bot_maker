@@ -1,0 +1,44 @@
+{
+	"inline_buttons": {
+		"l1"	: {
+			"text"			:	"1",
+			"url"			:	"https://www.youtube.com",
+			"callback_data"	:	"lal1"
+		},
+		"l2"	: {
+			"text"			:	"2",
+			"url"			:	"https://www.youtube.com",
+			"callback_data"	:	"lal2"
+		},
+		"l3"	: {
+			"text"			:	"3",
+			"url"			:	"https://www.youtube.com",
+			"callback_data"	:	"lal3"
+		},
+		"test_pay": {
+			"text"			: "pay",
+			"callback_data"	: "pay_btn",
+			"pay"			: true
+		}
+	},
+	
+	"keyboards": {
+		"start_cmd_kb"	: {
+			"type"		: "reply",
+			"markup"	: [
+				["1", "2"],
+				["/links"]
+			]
+		},
+		"links_cmd_ikb"	: {
+			"type"		: "inline",
+			"markup"	: [
+				["l1", "l2"],
+				["test_pay"]
+			]
+		},
+		"rm_kb": {
+			"type": "remove"
+		}
+	}
+}
