@@ -42,7 +42,7 @@
 			"type"		: "inline",
 			"markup"	: [
 				["l1", "l2"],
-				["test_pay"]
+				["test_pay"],
 			]
 		},
 		"rm_kb": {
