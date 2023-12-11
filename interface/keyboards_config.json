@@ -35,7 +35,7 @@
 			"type"		: "reply",
 			"markup"	: [
 				["1", "2"],
-				["/links"]
+				["/links", "/help", "/cmd"]
 			]
 		},
 		"links_cmd_ikb"	: {
