@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher
 
-from tg_object_constructor.routers.message_router import MSG_RT
-from tg_object_constructor.routers.command_router import CMD_RT
+from handlers.routers.message_router import MSG_RT
+from handlers.routers.command_router import CMD_RT
 
 import dotenv
 import os

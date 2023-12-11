@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import types
 
 from tg_object_constructor.utils import *
+from interface.config import keyboards_config
 
 
 reply_keyboards:	dict[str, ReplyKeyboardMarkup]	= {}

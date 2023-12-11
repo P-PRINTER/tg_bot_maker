@@ -5,7 +5,7 @@ from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup
 
 from interface.keyboards import reply_keyboards, inline_keyboards
 from interface.config import commands_config
-
+# from tg_object_constructor.utils import *
 
 CMD_RT 		= Router()
 CMD_PREFIX	= commands_config['prefix']
