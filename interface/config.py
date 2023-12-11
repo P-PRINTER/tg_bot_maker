@@ -1,5 +1,6 @@
-import json
 from typing import Any
+
+import json
 
 
 commands_config: dict[str, Any] = None

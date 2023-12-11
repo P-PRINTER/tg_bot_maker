@@ -2,8 +2,6 @@ from typing import Optional, Any, Callable
 
 from aiogram.types import *
 
-from interface.config import keyboards_config
-
 
 tg_handlers: dict[str, Callable] = {
 	'web_app_info'						: WebAppInfo,
@@ -65,61 +63,3 @@ def build_object (
 
 	result = handler(**arg_dict)
 	return result
-
-
-def build_inline_btn (btn_name: str) -> InlineKeyboardButton:
-
-	BTNS: dict 			= keyboards_config['inline_buttons']
-	btn_config: dict 	= BTNS[btn_name]
-
-	result_btn: InlineKeyboardButton = build_object(
-		config			= btn_config,
-		handler_dict	= tg_handlers,
-		skipping_names	= system_names_switch
-	)
-	return result_btn
-
-def build_reply_markup (markup: [[str]]) -> list[ list[KeyboardButton] ]:
-
-	result_markup : list[ list[KeyboardButton] ] = []
-
-	for btn_row in markup:
-
-		result_row = []
-		for btn_text in btn_row:
-			result_row.append( KeyboardButton(text = btn_text) )
-
-		result_markup.append(result_row)
-
-	return result_markup
-
-def build_inline_markup (markup: list[ list[str] ]) -> list[ list[InlineKeyboardButton] ]:
-
-	result_markup: list[ list[InlineKeyboardButton] ] = []
-	result_markup = list( map(lambda btn_row: list( map(build_inline_btn, btn_row) ), markup) )
-
-	return result_markup
-
-
-def build_reply_keyboard (keyboard: dict) -> ReplyKeyboardMarkup:
-
-	result_keyboard = None
-
-	markup 				= build_reply_markup( keyboard['markup'] )
-	result_keyboard		= ReplyKeyboardMarkup( keyboard = markup )
-
-	return result_keyboard
-
-def build_remove_keyboard (keyboard: Optional[dict]) -> ReplyKeyboardMarkup:
-
-	result_keyboard = ReplyKeyboardRemove()
-	return result_keyboard
-
-def build_inline_keyboard (keyboard: dict) -> InlineKeyboardMarkup:
-
-	result_keyboard = None
-
-	markup 				= build_inline_markup( keyboard['markup'] )
-	result_keyboard		= InlineKeyboardMarkup( inline_keyboard = markup )
-
-	return result_keyboard

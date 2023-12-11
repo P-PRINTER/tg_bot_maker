@@ -4,7 +4,7 @@ from aiogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButt
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import types
 
-from utils import *
+from tg_objects import constructor
 from interface.config import keyboards_config
 
 
@@ -18,14 +18,14 @@ for kb_name, kb_content in keyboards_config['keyboards'].items():
 
 	if 		kb_content['type'] == 'reply':
 		keyboard_dict 			= reply_keyboards
-		build_keyboard_func 	= build_reply_keyboard
+		build_keyboard_func 	= constructor.build_reply_keyboard
 
 	elif	kb_content['type'] == 'inline':
 		keyboard_dict 			= inline_keyboards
-		build_keyboard_func 	= build_inline_keyboard
+		build_keyboard_func 	= constructor.build_inline_keyboard
 
 	elif	kb_content['type'] == 'remove':
 		keyboard_dict			= reply_keyboards
-		build_keyboard_func		= build_remove_keyboard
+		build_keyboard_func		= constructor.build_remove_keyboard
 
 	keyboard_dict[kb_name] = build_keyboard_func(kb_content)
