@@ -3,8 +3,8 @@ from typing import Any, Optional, Union, Callable
 from aiogram import Router, filters, types
 from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup
 
-from keyboards import reply_keyboards, inline_keyboards
-from config import commands_config
+from interface.keyboards import reply_keyboards, inline_keyboards
+from interface.config import commands_config
 
 
 CMD_RT 		= Router()

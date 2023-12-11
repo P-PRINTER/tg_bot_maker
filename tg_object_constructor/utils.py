@@ -2,7 +2,7 @@ from typing import Optional, Any, Callable
 
 from aiogram.types import *
 
-from config import keyboards_config
+from interface.config import keyboards_config
 
 
 tg_handlers: dict[str, Callable] = {
