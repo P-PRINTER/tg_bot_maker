@@ -3,22 +3,6 @@ from typing import Optional, Any, Callable
 from aiogram.types import *
 
 
-tg_handlers: dict[str, Callable] = {
-	'web_app_info'						: WebAppInfo,
-	'login_url'							: LoginUrl,
-	'switch_inline_query_chosen_chat'	: SwitchInlineQueryChosenChat,
-	'callback_game'						: CallbackGame,
-	'reply_keyboard_markup'				: ReplyKeyboardMarkup,
-	'reply_keyboard_remove'				: ReplyKeyboardRemove,
-	'keyboard_button'					: KeyboardButton,
-	'inline_keyboard_markup'			: InlineKeyboardButton,
-	'inline_keyboard_button'			: InlineKeyboardButton,
-}
-
-system_names_switch = {
-	'handler_type'
-}
-
 def check_data_for_primitiveness (data: Any) -> bool:
 
 	result = False

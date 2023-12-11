@@ -1,13 +1,36 @@
 from typing import Any, Optional, Union, Callable
 
-from aiogram import Router, filters, types
+from aiogram import Bot, Dispatcher, Router
+from aiogram import filters
+
+from aiogram import types
 from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup
 
 from interface.keyboards import reply_keyboards, inline_keyboards
 from interface.config import commands_config
 # from utils import *
 
-CMD_RT 		= Router()
+# import dotenv
+# import os
+
+
+# dotenv.load_dotenv()
+
+
+# TOKEN	= os.getenv('API_TOKEN')
+# BOT		= Bot(TOKEN)
+
+# RT_LIST	= [
+# 	MSG_RT,
+# 	CMD_RT
+# ]
+
+def build_router (filter_type: str, exception_list: list[str] = None) -> Router:
+
+	pass
+
+
+RT 		= Router()
 CMD_PREFIX	= commands_config['prefix']
 
 def make_cmd_handler (
@@ -77,7 +100,7 @@ for cmd in commands_config['commands']:
 	] ] = build_answer_arg('reply_markup', cmd)
 
 	make_cmd_handler(
-		rt 				= CMD_RT,
+		rt 				= RT,
 		prefix 			= CMD_PREFIX,
 		command 		= cmd['name'],
 		answer_args 	= {
@@ -87,3 +110,13 @@ for cmd in commands_config['commands']:
 		answer_type 	= cmd["content_type"],
 		need_delete_msg = False
 	)
+
+
+
+# if __name__ == '__main__':
+	
+# 	DP = Dispatcher()
+# 	for rt in RT_LIST:
+# 		DP.include_router(rt)
+
+# 	DP.run_polling(BOT)
