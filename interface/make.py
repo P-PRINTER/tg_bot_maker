@@ -16,3 +16,6 @@ def run_bot(bot_token: str) -> None:
 	BOT = Bot(bot_token)
 
 	DP.run_polling(BOT)
+
+
+
