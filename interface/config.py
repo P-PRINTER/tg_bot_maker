@@ -23,25 +23,3 @@ def get_config(config_name: str) -> dict:
 
 commands_config: dict[str, Any] = get_config('commands')
 keyboards_config: dict[str, Any] = get_config('keyboards')
-
-# reply_keyboards:	dict[str, ReplyKeyboardMarkup]	= {}
-# inline_keyboards:	dict[str, InlineKeyboardMarkup]	= {}
-
-# for kb_name, kb_content in keyboards_config['keyboards'].items():
-
-# 	keyboard_dict: dict = None
-# 	build_keyboard_func: Callable = None
-
-# 	if 		kb_content['type'] == 'reply':
-# 		keyboard_dict 			= reply_keyboards
-# 		build_keyboard_func 	= constructor.build_reply_keyboard
-
-# 	elif	kb_content['type'] == 'inline':
-# 		keyboard_dict 			= inline_keyboards
-# 		build_keyboard_func 	= constructor.build_inline_keyboard
-
-# 	elif	kb_content['type'] == 'remove':
-# 		keyboard_dict			= reply_keyboards
-# 		build_keyboard_func		= constructor.build_remove_keyboard
-
-# 	keyboard_dict[kb_name] = build_keyboard_func(kb_content)

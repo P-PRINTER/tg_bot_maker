@@ -6,25 +6,9 @@ from aiogram import filters
 from aiogram import types
 from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup
 
-# from interface.keyboards import reply_keyboards, inline_keyboards
 from interface import config
 from tg_objects import constructor
-# from utils import *
 
-# import dotenv
-# import os
-
-
-# dotenv.load_dotenv()
-
-
-# TOKEN	= os.getenv('API_TOKEN')
-# BOT		= Bot(TOKEN)
-
-# RT_LIST	= [
-# 	MSG_RT,
-# 	CMD_RT
-# ]
 
 def build_router (filter_type: str, exception_list: list[str] = None) -> Router:
 
@@ -123,13 +107,3 @@ for cmd in config.commands_config['commands']:
 		answer_type 	= cmd["content_type"],
 		need_delete_msg = False
 	)
-
-
-
-# if __name__ == '__main__':
-	
-# 	DP = Dispatcher()
-# 	for rt in RT_LIST:
-# 		DP.include_router(rt)
-
-# 	DP.run_polling(BOT)
