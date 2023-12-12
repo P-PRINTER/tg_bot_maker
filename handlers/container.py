@@ -6,8 +6,9 @@ from aiogram import filters
 from aiogram import types
 from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup
 
-from interface.keyboards import reply_keyboards, inline_keyboards
-from interface.config import commands_config
+# from interface.keyboards import reply_keyboards, inline_keyboards
+from interface import config
+from tg_objects import constructor
 # from utils import *
 
 # import dotenv
@@ -34,17 +35,17 @@ def build_handler (config: dict[str, Any], handler) -> Callable:
 	pass
 
 RT 		= Router()
-CMD_PREFIX	= commands_config['prefix']
+CMD_PREFIX	= config.commands_config['prefix']
 
 def make_cmd_handler (
 	rt: Router,
 	prefix: str,
-	command: str,
+	command_name: str,
 	answer_args: dict[str, Union[str, ReplyKeyboardMarkup, InlineKeyboardMarkup]],
 	answer_type: str = 'text',
 	need_delete_msg: bool = False
 ) -> None:
-	@rt.message( filters.Command(prefix = prefix, commands = {command}) )
+	@rt.message( filters.Command(prefix = prefix, commands = {command_name}) )
 	async def links_cmd_handler (msg: types.Message):
 
 		switch: dict[str, Callable] = {
@@ -63,14 +64,14 @@ def make_cmd_handler (
 			await msg.delete()
 
 
-def build_answer_arg (arg_name: str, command: dict[str, Union[int, str, bool]]) -> Union[
+def build_answer_arg (arg_name: str, command_config: dict[str, Union[int, str, bool]]) -> Union[
 	str,
 	ReplyKeyboardMarkup,
 	InlineKeyboardMarkup,
 	None
 ]:
 
-	if not(arg_name in command):
+	if not(arg_name in command_config):
 		return None			#None
 
 	result_arg: Optional[ Union[
@@ -79,23 +80,32 @@ def build_answer_arg (arg_name: str, command: dict[str, Union[int, str, bool]]) 
 		str
 	] ] = None
 
+	keyboard_dict: dict = config.keyboards_config['keyboards']
+	if arg_name == 'reply_markup' and command_config['reply_markup'] in keyboard_dict:
 
-	if arg_name == 'reply_markup' and command[arg_name] in reply_keyboards:
-		result_arg = reply_keyboards[ command[arg_name] ]
-		return result_arg			#ReplyKeyboardMarkup
-	elif arg_name == 'reply_markup' and command[arg_name] in inline_keyboards:
-		result_arg = inline_keyboards[ command[arg_name] ]
-		return result_arg			#InlineKeyboardMarkup
-	elif arg_name == 'reply_markup':
-		return result_arg 			#None
+		keyboard_name:		str		= command_config['reply_markup']
+		keyboard_config:	dict	= keyboard_dict[keyboard_name]
 
+		if		keyboard_config['type'] == 'reply':
+			result_arg = constructor.build_reply_keyboard(keyboard_config)
+		elif	keyboard_config['type'] == 'inline':
+			result_arg = constructor.build_inline_keyboard(keyboard_config)
+		elif	keyboard_config['type'] == 'remove':
+			result_arg = constructor.build_remove_keyboard(keyboard_config)
+		else:
+			result_arg = None
 
-	result_arg = command[arg_name]
+		return result_arg
+
+	elif arg_name != 'reply_markup':
+
+		result_arg = command_config[arg_name]
+
 
 	return result_arg
 
 
-for cmd in commands_config['commands']:
+for cmd in config.commands_config['commands']:
 
 	reply_markup: Optional[ Union[
 		ReplyKeyboardMarkup,
@@ -105,7 +115,7 @@ for cmd in commands_config['commands']:
 	make_cmd_handler(
 		rt 				= RT,
 		prefix 			= CMD_PREFIX,
-		command 		= cmd['name'],
+		command_name	= cmd['name'],
 		answer_args 	= {
 			'content': cmd['content'],
 			'reply_markup': reply_markup

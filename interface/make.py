@@ -8,7 +8,7 @@ RT_LIST	= [
 ]
 
 
-run_bot(bot_token: str)
+def run_bot(bot_token: str) -> None:
 	
 	DP = Dispatcher()
 	DP.include_routers(*RT_LIST)

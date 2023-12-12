@@ -1,7 +1,7 @@
 import dotenv
 import os
 
-import interface
+from interface import make
 
 
 if __name__ == '__main__':
@@ -9,4 +9,4 @@ if __name__ == '__main__':
 	dotenv.load_dotenv()
 
 	TOKEN	= os.getenv('API_TOKEN')
-	interface.make.run_bot(TOKEN)
+	make.run_bot(TOKEN)
