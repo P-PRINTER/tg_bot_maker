@@ -8,7 +8,7 @@ RT_LIST	= [
 ]
 
 
-def run_bot(bot_token: str) -> None:
+def run_bot (bot_token: str) -> None:
 	
 	DP = Dispatcher()
 	DP.include_routers(*RT_LIST)
@@ -18,4 +18,6 @@ def run_bot(bot_token: str) -> None:
 	DP.run_polling(BOT)
 
 
+def stop_bot (bot_token: str) -> None:
 
+	pass
