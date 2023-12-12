@@ -3,7 +3,7 @@ from typing import Optional, Callable
 from aiogram.types import *
 import utils
 
-from interface import config
+from interface.config import get_config
 
 
 handler_dict: dict[str, Callable] = {
@@ -24,7 +24,7 @@ skipping_names_set: set[str] = {
 
 def build_inline_btn (btn_name: str) -> InlineKeyboardButton:
 
-	BTNS: dict 			= config.keyboards_config['inline_buttons']
+	BTNS: dict 			= get_config('keyboards')['inline_buttons']
 	btn_config: dict 	= BTNS[btn_name]
 
 	result_btn: InlineKeyboardButton = utils.build_object(

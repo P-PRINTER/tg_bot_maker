@@ -6,7 +6,7 @@ from aiogram import filters
 from aiogram import types
 from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup
 
-from interface import config
+from interface.config import get_config
 from tg_objects import constructor
 
 
@@ -19,7 +19,7 @@ def build_handler (config: dict[str, Any], handler) -> Callable:
 	pass
 
 RT 		= Router()
-CMD_PREFIX	= config.commands_config['prefix']
+CMD_PREFIX	= get_config('commands')['prefix']
 
 def make_cmd_handler (
 	rt: Router,
@@ -38,8 +38,8 @@ def make_cmd_handler (
 			'sticker'	: msg.answer_sticker,
 		}
 
-		answer: Callable = switch[answer_type]
-		await answer(
+		answer_func: Callable = switch[answer_type]
+		await answer_func(
 			answer_args['content'],
 			reply_markup 	= answer_args['reply_markup']
 		)
@@ -64,7 +64,7 @@ def build_answer_arg (arg_name: str, command_config: dict[str, Union[int, str, b
 		str
 	] ] = None
 
-	keyboard_dict: dict = config.keyboards_config['keyboards']
+	keyboard_dict: dict = get_config('keyboards')['keyboards']
 	if arg_name == 'reply_markup' and command_config['reply_markup'] in keyboard_dict:
 
 		keyboard_name:		str		= command_config['reply_markup']
@@ -89,7 +89,7 @@ def build_answer_arg (arg_name: str, command_config: dict[str, Union[int, str, b
 	return result_arg
 
 
-for cmd in config.commands_config['commands']:
+for cmd in get_config('commands')['commands']:
 
 	reply_markup: Optional[ Union[
 		ReplyKeyboardMarkup,
@@ -98,7 +98,7 @@ for cmd in config.commands_config['commands']:
 
 	make_cmd_handler(
 		rt 				= RT,
-		prefix 			= CMD_PREFIX,
+		prefix 			= get_config('commands')['prefix'],
 		command_name	= cmd['name'],
 		answer_args 	= {
 			'content': cmd['content'],

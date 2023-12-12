@@ -4,7 +4,7 @@ from aiogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButt
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import types
 
-from tg_objects import constructor
+# from tg_objects import constructor
 
 import json
 
@@ -18,8 +18,9 @@ def get_config(config_name: str) -> dict:
 
 	result_config = json.load(config_file)
 	config_file.close()
+	
 
 	return result_config
 
-commands_config: dict[str, Any] = get_config('commands')
-keyboards_config: dict[str, Any] = get_config('keyboards')
+# commands_config: dict[str, Any] = get_config('commands')
+# keyboards_config: dict[str, Any] = get_config('keyboards')
