@@ -29,6 +29,9 @@ def build_router (filter_type: str, exception_list: list[str] = None) -> Router:
 
 	pass
 
+def build_handler (config: dict[str, Any], handler) -> Callable:
+
+	pass
 
 RT 		= Router()
 CMD_PREFIX	= commands_config['prefix']
